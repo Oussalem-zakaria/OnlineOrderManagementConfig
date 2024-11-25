@@ -24,8 +24,10 @@ spring:
       profile: dev
       label: main
   datasource:
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    # username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    username: postgres
+    # password: ${SPRING_DATASOURCE_PASSWORD:password}
+    password: password
     url: jdbc:postgresql://postgres-db:5432/onlineordermanagement
   jpa:
     hibernate:
