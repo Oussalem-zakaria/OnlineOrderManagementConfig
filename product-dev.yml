@@ -1,0 +1,39 @@
+server:
+  port: 8082
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://eureka-server:8761/eureka}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  application:
+    name: product
+  cloud:
+    config:
+      uri: optional:configserver:${CONFIG_SERVICE_URL:http://config-server:8888}
+      fail-fast: true
+      profile: dev
+      label: main
+  # boot:
+  #   admin:
+  #     client:
+  #       url: ${ADMIN_SERVER_URL:http://localhost:8080}
+  datasource:
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    url: jdbc:postgresql://postgres-db:5432/onlineordermanagement?sslmode=disable
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
