@@ -1,0 +1,39 @@
+server:
+  port: 8084
+
+eureka:
+  client:
+    service-url:
+      # defaultZone: ${DISCOVERY_SERVICE_URL:http://eureka-server:8761/eureka}
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761/eureka}
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  application:
+    name: audit
+  cloud:
+    config:
+      # uri: ${CONFIG_SERVICE_URL:http://config-server:8888}
+      uri: optional:configserver:${CONFIG_SERVICE_URL:http://localhost:8888}
+      fail-fast: true
+      profile: dev
+      label: main
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/audit
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
