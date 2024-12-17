@@ -26,12 +26,12 @@ spring:
       profile: dev
       label: main
   datasource:
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/audit
-    password: admin
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres-db:5432/audit}
+    password: ${SPRING_DATASOURCE_PASSWORD:admin}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -41,5 +41,5 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwt-issue-uri: http://localhost:8080/realms/OnlineOrderManagement-Realm
-          jwk-set-uri: http://localhost:8080/realms/OnlineOrderManagement-Realm/protocol/openid-connect/certs
+          jwt-issue-uri: http://keycloak:8080/realms/OnlineOrderManagement-Realm  # Nom du conteneur Keycloak
+          jwk-set-uri: http://keycloak:8080/realms/OnlineOrderManagement-Realm/protocol/openid-connect/certs
