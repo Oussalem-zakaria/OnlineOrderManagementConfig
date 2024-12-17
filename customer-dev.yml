@@ -27,7 +27,7 @@ spring:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres-db:5432/customer}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
